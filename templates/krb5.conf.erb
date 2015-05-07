@@ -1,0 +1,22 @@
+[logging]
+ default = FILE:/var/log/krb5libs.log
+ kdc = FILE:/var/log/krb5kdc.log
+ admin_server = FILE:/var/log/kadmind.log
+
+[libdefaults]
+ dns_lookup_realm = true
+ dns_lookup_kdc = true
+ ticket_lifetime = 24h
+ renew_lifetime = 7d
+ forwardable = true
+ rdns = false
+ default_ccache_name = KEYRING:persistent:%{uid}
+ default_realm = <%= @realm.upcase %>
+
+[realms]
+ <%= @realm.upcase %> = {
+ }
+
+[domain_realm]
+ <%= @realm.downcase %> = <%= @realm.upcase %>
+ .<%= @realm.downcase %> = <%= @realm.upcase %>
