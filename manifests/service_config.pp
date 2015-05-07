@@ -43,7 +43,7 @@ define pam_krb5::service_config ($service=$title) {
             'try_first_pass',
             'use_authtok',
         ],
-        position  => 'after module pam_deny.so',
+        position  => 'before module pam_deny.so',
     }
 
     pam { "${service} password pam_krb5":
