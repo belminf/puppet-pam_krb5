@@ -12,3 +12,4 @@ Requirements
 Tested
 ---
 - RHEL7
+- RHEL6
