@@ -5,12 +5,11 @@ define pam_krb5::service_config ($service=$title) {
     }
 
     pam { "${service} auth pam_krb5":
-        service   => $service,
-        type      => 'auth',
-        control   => 'sufficient',
-        module    => 'pam_krb5.so',
-        arguments => 'use_first_pass',
-        position  => 'before module pam_deny.so',
+        service  => $service,
+        type     => 'auth',
+        control  => 'include',
+        module   => 'krb5',
+        position => 'before module pam_deny.so',
     }
 
     pam { "${service} account pam_unix":
@@ -47,19 +46,18 @@ define pam_krb5::service_config ($service=$title) {
     }
 
     pam { "${service} password pam_krb5":
-        service   => $service,
-        type      => 'password',
-        control   => 'sufficient',
-        module    => 'pam_krb5.so',
-        arguments => 'use_authtok',
-        position  => 'before module pam_deny.so',
+        service  => $service,
+        type     => 'password',
+        control  => 'include',
+        module   => 'krb5',
+        position => 'before module pam_deny.so',
     }
 
     pam { "${service} session pam_krb5":
         service  => $service,
         type     => 'session',
-        control  => 'optional',
-        module   => 'pam_krb5.so',
+        control  => 'include',
+        module   => 'krb5',
         position => 'after last',
     }
 }

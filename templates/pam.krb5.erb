@@ -1,0 +1,11 @@
+<% @realms.each do |realm| -%>
+auth        sufficient    pam_krb5.so use_first_pass realm=<%= realm.upcase %>
+<% end -%>
+
+<% @realms.each do |realm| -%>
+password    sufficient    pam_krb5.so use_authok realm=<%= realm.upcase %>
+<% end -%>
+
+<% @realms.each do |realm| -%>
+session     optional      pam_krb5.so realm=<%= realm.upcase %>
+<% end -%>

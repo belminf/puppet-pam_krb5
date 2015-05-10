@@ -11,12 +11,16 @@
  forwardable = true
  rdns = false
  default_ccache_name = KEYRING:persistent:%{uid}
- default_realm = <%= @realm.upcase %>
+ default_realm = <%= @realms[0].upcase %>
 
 [realms]
- <%= @realm.upcase %> = {
+<% @realms.each do |realm| -%>
+ <%= realm.upcase %> = {
  }
+<% end -%>
 
 [domain_realm]
- <%= @realm.downcase %> = <%= @realm.upcase %>
- .<%= @realm.downcase %> = <%= @realm.upcase %>
+<% @realms.each do |realm| -%>
+ <%= realm.downcase %> = <%= realm.upcase %>
+ .<%= realm.downcase %> = <%= realm.upcase %>
+<% end -%>
