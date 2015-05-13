@@ -61,4 +61,3 @@ define pam_krb5::service_config ($service=$title) {
         position => 'after last',
     }
 }
-
